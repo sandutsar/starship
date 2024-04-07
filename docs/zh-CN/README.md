@@ -1,36 +1,38 @@
 ---
-home: true
-heroImage: /logo.svg
-heroText:
-tagline: 轻量级、反应迅速，可定制的高颜值终端！
-actionText: 入门 →
-actionLink: ./guide/
+layout: home
+hero:
+  image: /logo.svg
+  text:
+  tagline: 轻量、迅速、客制化的高颜值终端！
+  actions:
+    - 
+      theme: brand
+      text: 快速上手 →
+      link: ./guide/
 features:
   - 
     title: 兼容性优先
-    details: Starship 可以在各种常见的操作系统和常见的 shell 上运行。 尝试着在各种地方使用它吧！
+    details: Starship 可以在常见的操作系统和 shell 上运行。 尝试着在各种地方使用它吧！
   - 
-    title: 使用 Rust 编写
-    details: 具有 Rust 独树一帜的速度与安全性，使你的提示符尽可能的快速可靠。
+    title: 基于 Rust
+    details: Rust 特有的的速度与安全性，让你的提示尽可能的快速可靠。
   - 
-    title: 可自定义
-    details: 每个小细节都可以按您喜欢的自定义，不论是最小化以求速度，还是最大化以获得最完善的功能。
-footer: ISC Licensed | Copyright © 2019-present Starship Contributors
+    title: 客制化
+    details: 每个小细节都可以按您喜欢的客制化，不论是最小化以求速度，还是更大以获得最完善的功能。
+footer: ISC 许可 | 版权所有 © 2019至今 - Starship 贡献者
 #Used for the description meta tag, for SEO
 metaTitle: "Starship：可用于各种 Shell 的提示符"
-description: Starship is the minimal, blazing fast, and extremely customizable prompt for any shell! Shows the information you need, while staying sleek and minimal. Quick installation available for Bash, Fish, ZSH, Ion, Tcsh, Elvish, Nu, Xonsh, Cmd, and PowerShell.
+description: Starship是一款轻量、迅速、可客制化的高颜值终端！ 只显示所需要的信息，将优雅和轻量化合二为一。 可以为Bash、Fish、ZSH、Ion、Tcsh、Elvish、Nu、Xonsh、Cmd和PowerShell执行快速安装。
 ---
 
-<div class="center">
-  <video class="demo-video" muted autoplay loop playsinline>
-    <source src="/demo.webm" type="video/webm">
-    <source src="/demo.mp4" type="video/mp4">
-  </video>
-</div>
+<video class="demo-video" muted autoplay loop playsinline>
+  <source src="/demo.webm" type="video/webm">
+  <source src="/demo.mp4" type="video/mp4">
+</video>
 
 ### 前置要求
 
-- 安装并在你的终端启用一种 [Nerd Font](https://www.nerdfonts.com/) 。
+- 安装并在你的终端启用 [Nerd Font](https://www.nerdfonts.com/) 。
 
 ### 快速安装
 
@@ -45,7 +47,7 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
    curl -sS https://starship.rs/install.sh | sh
    ```
 
-   自更新 Starship ，运行下面脚本 将会在不改动 Starship 配置文件的情况下升级版本
+   要更新 Starship ，运行上面的脚本 将会在不改动 Starship 配置文件的情况下升级版本
 
 
    #### 通过软件包管理器安装
@@ -56,18 +58,18 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
    brew install starship
    ```
 
-   使用 [Scoop](https://scoop.sh)：
+   使用 [ Winget](https://github.com/microsoft/winget-cli)：
 
    ```powershell
-   scoop install starship
+   winget install starship
    ```
 
-1. 将初始化脚本添加到您的 shell 的配置文件：
+1. 将初始化脚本添加到您的 shell 的配置文件中：
 
 
    #### Bash
 
-   在 `~/.bashhrc` 的最后，添加以下内容：
+   在 `~/.bashrc` 的最后，添加以下内容：
 
    ```sh
    # ~/.bashrc
@@ -98,7 +100,7 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
    ```
 
 
-   #### Powershell
+   #### PowerShell
 
    将以下内容添加到 `Microsoft.PowerShell_profile.ps1`。 你可以在 PowerShell 通过 `$PROFILE` 变量来查询文件的位置。 对于 -Nix 来说，通常文件路径是 `~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1` 或 `~/.config/powershell/Microsoft.PowerShell_profile.ps1`。
 
@@ -120,7 +122,11 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
 
    #### Elvish
 
-   ::: warning 警告 只支持 elvish v0.18 及以上。 :::
+   ::: warning
+
+   仅支持 elvish 0.18 及更高的版本。
+
+   :::
 
    在 `~/.config/fish/rc.elv` 的最后，添加以下内容：
 
@@ -133,7 +139,7 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
 
    #### Tcsh
 
-   在 `~/.bashhrc` 的最后，添加以下内容：
+   在 `~/.tcshrc` 的最后，添加以下内容：
 
    ```sh
    # ~/.tcshrc
@@ -144,23 +150,29 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
 
    #### Nushell
 
-   ::: warning 警告 将来可能会改变。 Only Nushell v0.60+ is supported. ::: Run the following:
+   ::: warning
+
+   这部分今后可能会改变。 仅支持 Nushell v0.78+。
+
+   :::
+
+   在您的 Nushell 环境文件的最后（使用 `$nu.env-path` 来获取它的路径），添加以下内容：
+
    ```sh
    mkdir ~/.cache/starship
-   starship init nu | save ~/.cache/starship/init.nu
+   starship init nu | save -f ~/.cache/starship/init.nu
    ```
 
-   And add the following to the end of your Nushell configuration (find it by running `$nu.config-path`):
+   然后在您的 Nushell 配置文件的最后（使用 `$nu.config-path` 来获取它的路径），添加以下内容：
 
    ```sh
-   mkdir ~/.cache/starship
-   starship init nu | save ~/.cache/starship/init.nu
-   source ~/.cache/starship/init.nu
+   use ~/.cache/starship/init.nu
    ```
+
 
    #### Xonsh
 
-   在 `~/.bashhrc` 的最后，添加以下内容：
+   在 `~/.xonshrc` 的最后，添加以下内容：
 
    ```sh
    # ~/.xonshrc

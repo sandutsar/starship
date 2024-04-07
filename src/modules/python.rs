@@ -133,7 +133,7 @@ fn get_prompt_from_venv(venv_path: &Path) -> Option<String> {
 mod tests {
     use super::*;
     use crate::test::ModuleRenderer;
-    use ansi_term::Color;
+    use nu_ansi_term::Color;
     use std::fs::{create_dir_all, File};
     use std::io;
     use std::io::Write;
@@ -376,10 +376,10 @@ Python 3.7.9 (7e6e2bb30ac5fbdbd443619cae28c51d5c162a02, Nov 24 2020, 10:03:59)
         create_dir_all(dir.path().join("my_venv"))?;
         let mut venv_cfg = File::create(dir.path().join("my_venv").join("pyvenv.cfg"))?;
         venv_cfg.write_all(
-            br#"
+            br"
 home = something
 prompt = 'foo'
-        "#,
+        ",
         )?;
         venv_cfg.sync_all()?;
 
@@ -403,10 +403,10 @@ prompt = 'foo'
         create_dir_all(dir.path().join("my_venv"))?;
         let mut venv_cfg = File::create(dir.path().join("my_venv").join("pyvenv.cfg"))?;
         venv_cfg.write_all(
-            br#"
+            br"
 home = something
 prompt = '(foo)'
-        "#,
+        ",
         )?;
         venv_cfg.sync_all()?;
 
@@ -424,7 +424,7 @@ prompt = '(foo)'
         dir.close()
     }
 
-    fn check_python2_renders(dir: &tempfile::TempDir, starship_config: Option<toml::Value>) {
+    fn check_python2_renders(dir: &tempfile::TempDir, starship_config: Option<toml::Table>) {
         let config = starship_config.unwrap_or(toml::toml! {
             [python]
             python_binary = "python2"
@@ -439,7 +439,7 @@ prompt = '(foo)'
         assert_eq!(expected, actual);
     }
 
-    fn check_python3_renders(dir: &tempfile::TempDir, starship_config: Option<toml::Value>) {
+    fn check_python3_renders(dir: &tempfile::TempDir, starship_config: Option<toml::Table>) {
         let config = starship_config.unwrap_or(toml::toml! {
              [python]
              python_binary = "python3"
@@ -456,7 +456,7 @@ prompt = '(foo)'
 
     fn check_multiple_binaries_renders(
         dir: &tempfile::TempDir,
-        starship_config: Option<toml::Value>,
+        starship_config: Option<toml::Table>,
     ) {
         let config = starship_config.unwrap_or(toml::toml! {
              [python]
@@ -472,7 +472,7 @@ prompt = '(foo)'
         assert_eq!(expected, actual);
     }
 
-    fn check_pyenv_renders(dir: &tempfile::TempDir, starship_config: Option<toml::Value>) {
+    fn check_pyenv_renders(dir: &tempfile::TempDir, starship_config: Option<toml::Table>) {
         let config = starship_config.unwrap_or(toml::toml! {
              [python]
              pyenv_version_name = true

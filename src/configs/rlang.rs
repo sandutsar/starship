@@ -1,7 +1,11 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Deserialize, Serialize)]
-#[cfg_attr(feature = "config-schema", derive(schemars::JsonSchema))]
+#[cfg_attr(
+    feature = "config-schema",
+    derive(schemars::JsonSchema),
+    schemars(deny_unknown_fields)
+)]
 #[serde(default)]
 pub struct RLangConfig<'a> {
     pub format: &'a str,
@@ -23,7 +27,7 @@ impl<'a> Default for RLangConfig<'a> {
             symbol: "📐 ",
             disabled: false,
             detect_extensions: vec!["R", "Rd", "Rmd", "Rproj", "Rsx"],
-            detect_files: vec![".Rprofile"],
+            detect_files: vec!["DESCRIPTION"],
             detect_folders: vec![".Rproj.user"],
         }
     }

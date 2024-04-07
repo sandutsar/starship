@@ -1,10 +1,13 @@
 ---
-home: true
-heroImage: /logo.svg
-heroText: null
-tagline: The minimal, blazing-fast, and infinitely customizable prompt for any shell!
-actionText: Get Started →
-actionLink: ./guide/
+layout: home
+hero:
+  image: /logo.svg
+  text: null
+  tagline: The minimal, blazing-fast, and infinitely customizable prompt for any shell!
+  actions:
+    - theme: brand
+      text: Get Started →
+      link: ./guide/
 features:
   - title: Compatibility First
     details: Works on the most common shells on the most common operating systems. Use it everywhere!
@@ -19,12 +22,10 @@ metaTitle: "Starship: Cross-Shell Prompt"
 description: Starship is the minimal, blazing fast, and extremely customizable prompt for any shell! Shows the information you need, while staying sleek and minimal. Quick installation available for Bash, Fish, ZSH, Ion, Tcsh, Elvish, Nu, Xonsh, Cmd, and PowerShell.
 ---
 
-<div class="center">
-  <video class="demo-video" muted autoplay loop playsinline>
-    <source src="/demo.webm" type="video/webm">
-    <source src="/demo.mp4" type="video/mp4">
-  </video>
-</div>
+<video class="demo-video" muted autoplay loop playsinline>
+  <source src="/demo.webm" type="video/webm">
+  <source src="/demo.mp4" type="video/mp4">
+</video>
 
 ### Prerequisites
 
@@ -52,10 +53,10 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
    brew install starship
    ```
 
-   With [Scoop](https://scoop.sh):
+   With [Winget](https://github.com/microsoft/winget-cli):
 
    ```powershell
-   scoop install starship
+   winget install starship
    ```
 
 1. Add the init script to your shell's config file:
@@ -139,23 +140,23 @@ description: Starship is the minimal, blazing fast, and extremely customizable p
    ::: warning
 
    This will change in the future.
-   Only Nushell v0.60+ is supported.
+   Only Nushell v0.78+ is supported.
 
    :::
 
-   Run the following:
+   Add the following to the end of your Nushell env file (find it by running `$nu.env-path` in Nushell):
+
    ```sh
    mkdir ~/.cache/starship
-   starship init nu | save ~/.cache/starship/init.nu
+   starship init nu | save -f ~/.cache/starship/init.nu
    ```
 
    And add the following to the end of your Nushell configuration (find it by running `$nu.config-path`):
 
    ```sh
-   mkdir ~/.cache/starship
-   starship init nu | save ~/.cache/starship/init.nu
-   source ~/.cache/starship/init.nu
+   use ~/.cache/starship/init.nu
    ```
+
    #### Xonsh
 
    Add the following to the end of `~/.xonshrc`:

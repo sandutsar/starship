@@ -1,4 +1,4 @@
-[Volver a Preajustes](./README.md#pure)
+[Volver a Preajustes](./#pure)
 
 # Preajuste Pure
 
@@ -8,6 +8,10 @@ Esta preajuste emula la apariencia y el comportamiento de [Pure](https://github.
 
 ### Configuración
 
+```sh
+starship preset pure-preset -o ~/.config/starship.toml
+```
+
 [Clic para descargar TOML](/presets/toml/pure-preset.toml)
 
-<<< @/.vuepress/public/presets/toml/pure-preset.toml
+<<< @/public/presets/toml/pure-preset.toml

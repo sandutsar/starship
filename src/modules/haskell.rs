@@ -64,7 +64,7 @@ fn get_snapshot(context: &Context) -> Option<String> {
         return None;
     }
     let file_contents = context.read_file_from_pwd("stack.yaml")?;
-    let yaml = yaml_rust::YamlLoader::load_from_str(&file_contents).ok()?;
+    let yaml = yaml_rust2::YamlLoader::load_from_str(&file_contents).ok()?;
     let version = yaml.first()?["resolver"]
         .as_str()
         .or_else(|| yaml.first()?["snapshot"].as_str())
@@ -87,7 +87,7 @@ fn is_stack_project(context: &Context) -> bool {
 #[cfg(test)]
 mod tests {
     use crate::test::ModuleRenderer;
-    use ansi_term::Color;
+    use nu_ansi_term::Color;
     use std::fs::File;
     use std::io;
     use std::io::Write;
@@ -105,7 +105,7 @@ mod tests {
     fn folder_stack() -> io::Result<()> {
         let cases = vec![
             ("resolver: lts-18.12\n", "lts-18.12"),
-            ("snapshot:\tnightly-2011-11-11", "nightly-2011-11-11"),
+            ("snapshot: nightly-2011-11-11", "nightly-2011-11-11"),
             ("snapshot: ghc-8.10.7", "ghc-8.10.7"),
             (
                 "snapshot: https://github.com/whatever/xxx.yaml\n",
@@ -125,7 +125,7 @@ mod tests {
             let actual = ModuleRenderer::new("haskell").path(dir.path()).collect();
             let expected = Some(format!(
                 "via {}",
-                Color::Purple.bold().paint(format!("λ {} ", resolver))
+                Color::Purple.bold().paint(format!("λ {resolver} "))
             ));
             assert_eq!(expected, actual);
             dir.close()?;

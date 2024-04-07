@@ -47,7 +47,7 @@ pub fn module<'a>(context: &'a Context) -> Option<Module<'a>> {
                     } else {
                         return None;
                     };
-                    Some(c_compiler).map(Cow::Borrowed).map(Ok)
+                    Some(Ok(Cow::Borrowed(c_compiler)))
                 }
                 "version" => {
                     let c_compiler_info = &c_compiler_info.deref().as_ref()?.stdout;
@@ -65,12 +65,9 @@ pub fn module<'a>(context: &'a Context) -> Option<Module<'a>> {
                     // so again we always want the first semver-ish word.
                     VersionFormatter::format_module_version(
                         module.get_name(),
-                        c_compiler_info.split_whitespace().find_map(
-                            |word| match Version::parse(word) {
-                                Ok(_v) => Some(word),
-                                Err(_e) => None,
-                            },
-                        )?,
+                        c_compiler_info
+                            .split_whitespace()
+                            .find(|word| Version::parse(word).is_ok())?,
                         config.version_format,
                     )
                     .map(Cow::Owned)
@@ -95,7 +92,7 @@ pub fn module<'a>(context: &'a Context) -> Option<Module<'a>> {
 #[cfg(test)]
 mod tests {
     use crate::{test::ModuleRenderer, utils::CommandOutput};
-    use ansi_term::Color;
+    use nu_ansi_term::Color;
     use std::fs::File;
     use std::io;
 

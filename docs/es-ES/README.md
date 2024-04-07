@@ -1,10 +1,14 @@
 ---
-home: true
-heroImage: /logo.svg
-heroText:
-tagline: '¡El prompt minimalista, ultrarápido e infinitamente personalizable para cualquier intérprete de comandos!'
-actionText: Comenzar →
-actionLink: ./guide/
+layout: home
+hero:
+  image: /logo.svg
+  text:
+  tagline: '¡El prompt minimalista, ultrarápido e infinitamente personalizable para cualquier intérprete de comandos!'
+  actions:
+    - 
+      theme: brand
+      text: Comenzar →
+      link: ./guide/
 features:
   - 
     title: Compatibilidad primero
@@ -21,12 +25,10 @@ metaTitle: "Starship: el prompt multi-intérprete"
 description: '¡Starship es el prompt minimalista, ultrarápido e infinitamente personalizable para cualquier intérprete de comandos! Muestra la información que necesitas, a la par que es elegante y minimalista. Instalación rápida disponible para Bash, Fish, ZSH, Ion, Tcsh, Elvish, Nu, Xonsh, Cmd, y PowerShell.'
 ---
 
-<div class="center">
-  <video class="demo-video" muted autoplay loop playsinline>
-    <source src="/demo.webm" type="video/webm">
-    <source src="/demo.mp4" type="video/mp4">
-  </video>
-</div>
+<video class="demo-video" muted autoplay loop playsinline>
+  <source src="/demo.webm" type="video/webm">
+  <source src="/demo.mp4" type="video/mp4">
+</video>
 
 ### Prerequisitos
 
@@ -56,10 +58,10 @@ description: '¡Starship es el prompt minimalista, ultrarápido e infinitamente 
    brew install starship
    ```
 
-   Con [Scoop](https://scoop.sh):
+   With [Winget](https://github.com/microsoft/winget-cli):
 
    ```powershell
-   scoop install starship
+   winget install starship
    ```
 
 1. Añade el guión de inicio al archivo de configuración de tu intérprete de comandos:
@@ -120,7 +122,11 @@ description: '¡Starship es el prompt minimalista, ultrarápido e infinitamente 
 
    #### Elvish
 
-   ::: warning Solo se admite Elvish v0.18 o superior. :::
+   ::: warning
+
+   Sólo se admite elvish v0.18 o superior.
+
+   :::
 
    Añade el siguiente código al final de `~/.elvish/rc.elv`:
 
@@ -144,19 +150,25 @@ description: '¡Starship es el prompt minimalista, ultrarápido e infinitamente 
 
    #### Nushell
 
-   ::: advertencia Esto cambiará en el futuro. Sólo se admite Nushell v0.60+. ::: Ejecuta lo siguiente:
+   ::: warning
+
+   Esto cambiará en el futuro. Sólo se admite Nushell v0.78+.
+
+   :::
+
+   Añade lo siguiente al final de tu archivo Nushell env (encuéntralo ejecutando `$nu.env-path` en Nushell):
+
    ```sh
    mkdir ~/.cache/starship
-   starship init nu | save ~/.cache/starship/init.nu
+   starship init nu | save -f ~/.cache/starship/init.nu
    ```
 
    Añade lo siguiente al final de tu configuración de Nushell (encuéntrala ejecutando `$nu.config-path`):
 
    ```sh
-   mkdir ~/.cache/starship
-   starship init nu | save ~/.cache/starship/init.nu
-   source ~/.cache/starship/init.nu
+   use ~/.cache/starship/init.nu
    ```
+
 
    #### Xonsh
 
